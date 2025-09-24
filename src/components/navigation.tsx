@@ -9,7 +9,8 @@ import {
   FileText, 
   AlertTriangle,
   User,
-  Bell
+  Bell,
+  Settings
 } from "lucide-react";
 import * as Avatar from "@radix-ui/react-avatar";
 

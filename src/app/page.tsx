@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { Navigation } from "@/components/navigation";
 import { Dashboard } from "@/components/dashboard";
-import { ChatInterface } from "@/components/chat-interface";
+import { EnhancedChatInterface } from "@/components/enhanced-chat-interface";
 import { AnomalyDetection } from "@/components/anomaly-detection";
 import { Reports } from "@/components/reports";
+import { ToolsOverview } from "@/components/tools-overview";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
@@ -27,11 +28,13 @@ export default function Home() {
                 </p>
               </div>
               <div className="bg-white rounded-lg border shadow-sm">
-                <ChatInterface />
+                <EnhancedChatInterface />
               </div>
             </div>
           </div>
         );
+      case "tools":
+        return <ToolsOverview />;
       case "reports":
         return <Reports />;
       case "anomalies":
