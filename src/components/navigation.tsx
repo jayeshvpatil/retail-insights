@@ -25,7 +25,7 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
     { id: "insights", label: "Insights", icon: BarChart3 },
     { id: "chat", label: "Chat", icon: MessageSquare },
     { id: "reports", label: "Reports", icon: FileText },
-    { id: "anomalies", label: "Anomaly Detection", icon: AlertTriangle },
+    { id: "alerts", label: "Business Alerts", icon: AlertTriangle },
   ];
 
   return (
@@ -61,14 +61,9 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
           </Button>
           
           <Avatar.Root className="inline-flex h-8 w-8 select-none items-center justify-center overflow-hidden rounded-full bg-gray-100">
-            <Avatar.Image
-              className="h-full w-full rounded-[inherit] object-cover"
-              src="/placeholder-avatar.jpg"
-              alt="User avatar"
-            />
             <Avatar.Fallback
-              className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-white text-sm font-medium"
-              delayMs={600}
+              className="text-slate-600 leading-1 flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 text-sm font-medium"
+              delayMs={0}
             >
               <User className="w-4 h-4" />
             </Avatar.Fallback>

@@ -17,8 +17,8 @@ export interface RetailResponse {
   data?: Record<string, unknown>[];
 }
 
-export class RetailAgentService {
-  private model = genAI.getGenerativeModel({ model: "gemini-pro" });
+export class RetailAgent {
+  private model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   async processQuery(query: RetailQuery): Promise<RetailResponse> {
     try {

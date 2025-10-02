@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, TrendingDown, Users, Package, DollarSign, AlertTriangle } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { TrendingUp, TrendingDown, Users, Package, AlertTriangle, ShoppingCart, DollarSign } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { BigQueryConnectionStatus } from './bigquery-status';
 
 const salesData = [
   { name: "Jan", value: 400000 },
@@ -47,7 +49,7 @@ function KPICard({ title, value, change, isPositive, icon }: KPICardProps) {
   );
 }
 
-interface AnomalyCardProps {
+interface AlertCardProps {
   title: string;
   description: string;
   impact: string;
@@ -55,7 +57,7 @@ interface AnomalyCardProps {
   action: string;
 }
 
-function AnomalyCard({ title, description, impact, severity, action }: AnomalyCardProps) {
+function AlertCard({ title, description, impact, severity, action }: AlertCardProps) {
   const severityColors = {
     high: "border-red-500 bg-red-50",
     medium: "border-yellow-500 bg-yellow-50",
@@ -101,6 +103,9 @@ export function Dashboard() {
           Your retail business insights at a glance
         </p>
       </div>
+
+      {/* BigQuery Connection Status */}
+      <BigQueryConnectionStatus />
 
       {/* KPIs */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -172,37 +177,37 @@ export function Dashboard() {
         </Card>
       </div>
 
-      {/* Recent Anomalies */}
-      <div>
-        <h3 className="text-xl font-semibold mb-4">Recent Anomalies</h3>
-        <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2">
-          <AnomalyCard
-            title="Sudden Drop in Sales"
-            description="A significant decrease in sales was observed in the last week, potentially due to a shift in consumer behavior or external market factors."
-            impact="Potential Impact: Revenue Loss"
+      {/* Recent Business Alerts */}
+      <div className="mt-8">
+        <h3 className="text-xl font-semibold mb-4">Recent Business Alerts</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <AlertCard
+            title="Low Stock Alert"
+            description="Premium Leather Handbags are running low in inventory. Only 15 units remaining."
+            impact="Potential stock shortage in 3-5 days"
             severity="high"
-            action="Investigate"
+            action="Reorder immediately"
           />
-          <AnomalyCard
-            title="Increase in Customer Churn"
-            description="Customer churn has increased by 15% in the past month. This could be attributed to changes in service quality, competitive offers, or unmet customer expectations."
-            impact="Potential Impact: Customer Dissatisfaction"
+          <AlertCard
+            title="Sales Performance"
+            description="Summer collection sales are below expectations. 20% decrease compared to last month."
+            impact="Revenue impact: -$45,000"
             severity="medium"
-            action="Investigate"
+            action="Review pricing strategy"
           />
-          <AnomalyCard
+          <AlertCard
             title="Inventory Discrepancy"
-            description="Anomalies detected in inventory levels indicate potential discrepancies between recorded stock and actual physical inventory."
-            impact="Potential Impact: Increased Costs"
-            severity="medium"
-            action="Investigate"
-          />
-          <AnomalyCard
-            title="Clothing Returns Spike"
-            description="A spike in returns for 'Clothing' items was detected on July 22, 2024. This could be due to quality issues or incorrect sizing information."
-            impact="Potential Impact: Increased Costs"
+            description="Business alerts detected in inventory levels indicate potential discrepancies between recorded stock and actual physical inventory."
+            impact="Operational efficiency concerns"
             severity="low"
-            action="Investigate"
+            action="Schedule audit"
+          />
+          <AlertCard
+            title="Customer Complaints"
+            description="Increased customer complaints regarding delivery delays in the North region."
+            impact="Customer satisfaction at risk"
+            severity="medium"
+            action="Contact logistics team"
           />
         </div>
       </div>

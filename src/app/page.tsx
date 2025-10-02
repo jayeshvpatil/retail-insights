@@ -3,10 +3,9 @@
 import React, { useState } from "react";
 import { Navigation } from "@/components/navigation";
 import { Dashboard } from "@/components/dashboard";
-import { EnhancedChatInterface } from "@/components/enhanced-chat-interface";
-import { AnomalyDetection } from "@/components/anomaly-detection";
+import { BusinessChatInterface } from "@/components/business-chat-interface";
+import { Alerts } from "@/components/alerts";
 import { Reports } from "@/components/reports";
-import { ToolsOverview } from "@/components/tools-overview";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
@@ -18,27 +17,11 @@ export default function Home() {
       case "insights":
         return <Dashboard />;
       case "chat":
-        return (
-          <div className="p-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="mb-6">
-                <h2 className="text-3xl font-bold tracking-tight mb-2">Retail Insights</h2>
-                <p className="text-muted-foreground">
-                  Ask questions about your retail data and get instant insights powered by AI
-                </p>
-              </div>
-              <div className="bg-white rounded-lg border shadow-sm">
-                <EnhancedChatInterface />
-              </div>
-            </div>
-          </div>
-        );
-      case "tools":
-        return <ToolsOverview />;
+        return <BusinessChatInterface />;
       case "reports":
         return <Reports />;
-      case "anomalies":
-        return <AnomalyDetection />;
+      case "alerts":
+        return <Alerts />;
       default:
         return <Dashboard />;
     }
@@ -46,9 +29,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-      <main className="flex-1">
-        {renderContent()}
+      {activeTab !== "chat" && <Navigation activeTab={activeTab} onTabChange={setActiveTab} />}
+      <main className={activeTab === "chat" ? "h-screen" : "flex-1"}>
+        {activeTab === "chat" ? (
+          <BusinessChatInterface onNavigationToggle={() => setActiveTab("home")} />
+        ) : (
+          renderContent()
+        )}
       </main>
     </div>
   );
